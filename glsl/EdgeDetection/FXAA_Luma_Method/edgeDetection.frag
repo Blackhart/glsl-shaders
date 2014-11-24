@@ -1,4 +1,4 @@
-#version 150 core
+#version 430 core
 
 // In
 noperspective in highp vec2    texCoord;

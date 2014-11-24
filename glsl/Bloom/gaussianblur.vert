@@ -1,53 +1,46 @@
-#version 150 core
-#define KERNEL 10
+#version 430 core
+
+// Subroutine def
+subroutine void BlurType();
 
 // In
-in highp vec4		in_Vertex;
-in highp vec2		in_TexCoord;
+in highp vec4   in_Vertex;
+in highp vec2   in_TexCoord;
 
 // Uni
-uniform highp mat4	uni_Matrix;
-uniform int		uni_Type;
-uniform vec2		uni_Size;
+uniform highp mat4          uni_Matrix;
+uniform vec2                uni_Size;
+subroutine uniform BlurType uni_Blur;
 
 // Out
-smooth out highp vec2	texCoord;
-smooth out highp vec2	offsetP[KERNEL];
-smooth out highp vec2	offsetN[KERNEL];
+smooth out highp vec2	offset[5];
 
-// Function def
-void	HBlur();
-void	VBlur();
+// function def
 
+subroutine (BlurType) void	VBlur()
+{
+    float   y = 1.0f / uni_Size.y;
+    float   yc = 2.0f * y;
+    offset[0] = vec2(in_TexCoord.x, in_TexCoord.y - yc);
+    offset[1] = vec2(in_TexCoord.x, in_TexCoord.y - y);
+    offset[2] = in_TexCoord;
+    offset[3] = vec2(in_TexCoord.x, in_TexCoord.y + y);
+    offset[4] = vec2(in_TexCoord.x, in_TexCoord.y + yc);
+}
+
+subroutine (BlurType) void	HBlur()
+{
+    float   x = 1.0f / uni_Size.x;
+    float   xc = 2.0f * x;
+    offset[0] = vec2(in_TexCoord.x - xc, in_TexCoord.y);
+    offset[1] = vec2(in_TexCoord.x - x, in_TexCoord.y);
+    offset[2] = in_TexCoord;
+    offset[3] = vec2(in_TexCoord.x + x, in_TexCoord.y);
+    offset[4] = vec2(in_TexCoord.x + xc, in_TexCoord.y);
+}
 
 void	main()
 {
-    texCoord = in_TexCoord;
     gl_Position = uni_Matrix * in_Vertex;
-    if (uni_Type == 1)
-        HBlur();
-    else
-        VBlur();
-}
-
-void	HBlur()
-{
-    float	lDX = 1.0f / uni_Size.x;
-    for (int i = 1; i < KERNEL; i += 1)
-    {
-        float	x = lDX * i;
-        offsetP[i] = vec2(texCoord.x + x, texCoord.y);
-        offsetN[i] = vec2(texCoord.x - x, texCoord.y);
-    }
-}
-
-void	VBlur()
-{
-    float	lDY = 1.0f / uni_Size.y;
-    for (int i = 1; i < KERNEL; i += 1)
-    {
-        float	y = lDY * i;
-        offsetP[i] = vec2(texCoord.x, texCoord.y + y);
-        offsetN[i] = vec2(texCoord.x, texCoord.y - y);
-    }
+    uni_Blur();
 }

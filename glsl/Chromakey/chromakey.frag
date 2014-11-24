@@ -8,7 +8,7 @@
 smooth in highp vec2    texCoord;
 
 // Uni
-uniform sampler2D	uni_source1;
+uniform sampler2D	uni_Texture;
 uniform float		uni_h1;
 uniform float		uni_h2;
 uniform float		uni_saturationMin;
@@ -30,7 +30,7 @@ int     inValueInterval(float);
 
 void    main(void)
 {
-    vec4    lRealColor = texture2D(uni_source1, texCoord);
+    vec4    lRealColor = texture2D(uni_Texture, texCoord);
     out_Color = process(lRealColor);
 }
 

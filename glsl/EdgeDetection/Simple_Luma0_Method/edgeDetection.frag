@@ -1,4 +1,4 @@
-#version 150 core
+#version 430 core
 
 // In
 smooth in highp vec2    texCoord;
