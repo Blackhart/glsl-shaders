@@ -35,9 +35,6 @@ Shader "Bk/Standard (Specular setup)"
 		_DetailNormalMapScale("Scale", Float) = 1.0
 		_DetailNormalMap("Normal Map", 2D) = "bump" {}
 
-		_Exposure ("Exposure", Float) = 1.0
-		_Grayscale ("Grayscale", Range(0.0, 1.0)) = 0.0
-
 		[Enum(UV0,0,UV1,1)] _UVSec ("UV Set for secondary textures", Float) = 0
 
 
@@ -50,7 +47,6 @@ Shader "Bk/Standard (Specular setup)"
 
 	CGINCLUDE
 		#define UNITY_SETUP_BRDF_INPUT SpecularSetup
-		#define NOVANILLA
 	ENDCG
 
 	SubShader

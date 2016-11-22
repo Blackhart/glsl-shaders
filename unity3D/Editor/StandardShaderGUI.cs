@@ -49,8 +49,6 @@ public class BkStandardShaderGUI : ShaderGUI
 		public static GUIContent detailMaskText = new GUIContent("Detail Mask", "Mask for Secondary Maps (A)");
 		public static GUIContent detailAlbedoText = new GUIContent("Detail Albedo x2", "Albedo (RGB) multiplied by 2");
 		public static GUIContent detailNormalMapText = new GUIContent("Normal Map", "Normal Map");
-		public static GUIContent exposureText = new GUIContent("Exposure", "Exposure value");
-		public static GUIContent grayscaleText = new GUIContent("Grayscale", "Grayscale coeff [ Color=0|Grayscale=1 ]");
 
 		public static string whiteSpaceString = " ";
 		public static string primaryMapsText = "Main Maps";
@@ -88,8 +86,6 @@ public class BkStandardShaderGUI : ShaderGUI
 	MaterialProperty detailAlbedoMap = null;
 	MaterialProperty detailNormalMapScale = null;
 	MaterialProperty detailNormalMap = null;
-	MaterialProperty exposure = null;
-	MaterialProperty grayscale = null;
 	MaterialProperty uvSetSecondary = null;
 
 	MaterialEditor m_MaterialEditor;
@@ -132,8 +128,6 @@ public class BkStandardShaderGUI : ShaderGUI
 		detailAlbedoMap = FindProperty ("_DetailAlbedoMap", props);
 		detailNormalMapScale = FindProperty ("_DetailNormalMapScale", props);
 		detailNormalMap = FindProperty ("_DetailNormalMap", props);
-		exposure = FindProperty ("_Exposure", props);
-		grayscale = FindProperty ("_Grayscale", props);
 		uvSetSecondary = FindProperty ("_UVSec", props);
 	}
 
@@ -186,8 +180,6 @@ public class BkStandardShaderGUI : ShaderGUI
 			m_MaterialEditor.TexturePropertySingleLine(Styles.detailAlbedoText, detailAlbedoMap);
 			m_MaterialEditor.TexturePropertySingleLine(Styles.detailNormalMapText, detailNormalMap, detailNormalMapScale);
 			m_MaterialEditor.TextureScaleOffsetProperty(detailAlbedoMap);
-			m_MaterialEditor.ShaderProperty (exposure, Styles.exposureText);
-			m_MaterialEditor.ShaderProperty (grayscale, Styles.grayscaleText);
 			m_MaterialEditor.ShaderProperty(uvSetSecondary, Styles.uvSetLabel.text);
 
 			// Third properties
