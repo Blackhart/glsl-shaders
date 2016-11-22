@@ -1,3 +1,10 @@
+// Upgrade NOTE: replaced 'defined DIRECTIONAL' with 'defined (DIRECTIONAL)'
+// Upgrade NOTE: replaced 'defined DIRECTIONAL_COOKIE' with 'defined (DIRECTIONAL_COOKIE)'
+// Upgrade NOTE: replaced 'defined POINT' with 'defined (POINT)'
+// Upgrade NOTE: replaced 'defined POINT_COOKIE' with 'defined (POINT_COOKIE)'
+// Upgrade NOTE: replaced 'defined POINT_NOATT' with 'defined (POINT_NOATT)'
+// Upgrade NOTE: replaced 'defined SPOT' with 'defined (SPOT)'
+
 #ifndef UNITY_CG_INCLUDED
 #define UNITY_CG_INCLUDED
 
@@ -40,11 +47,11 @@ uniform vec4 _LightPositionRange; // xyz = pos, w = 1/range
 // -------------------------------------------------------------------
 //  helper functions and macros used in many standard shaders
 
-#if defined DIRECTIONAL || defined DIRECTIONAL_COOKIE
+#if defined (DIRECTIONAL) || defined (DIRECTIONAL_COOKIE)
 #define USING_DIRECTIONAL_LIGHT
 #endif
 
-#if defined DIRECTIONAL || defined DIRECTIONAL_COOKIE || defined POINT || defined SPOT || defined POINT_NOATT || defined POINT_COOKIE
+#if defined (DIRECTIONAL) || defined (DIRECTIONAL_COOKIE) || defined (POINT) || defined (SPOT) || defined (POINT_NOATT) || defined (POINT_COOKIE)
 #define USING_LIGHT_MULTI_COMPILE
 #endif
 
