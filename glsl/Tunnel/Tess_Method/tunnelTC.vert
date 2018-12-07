@@ -1,0 +1,20 @@
+#version 430 core
+
+#define lvl 50
+
+// Out
+layout (vertices = 4) out;
+
+void main(void)
+{
+    if (gl_InvocationID == 0)
+    {
+            gl_TessLevelOuter[0] = 1;
+            gl_TessLevelOuter[1] = lvl;
+            gl_TessLevelOuter[2] = 1;
+            gl_TessLevelOuter[3] = lvl;
+            gl_TessLevelInner[0] = lvl;
+            gl_TessLevelInner[1] = 1;
+    }
+    gl_out[gl_InvocationID].gl_Position = gl_in[gl_InvocationID].gl_Position;
+}
